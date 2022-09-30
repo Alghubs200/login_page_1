@@ -1,23 +1,15 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    List images = ["g.png", "t.jpg", "f.jpg"];
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
@@ -27,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
             height: h * 0.5,
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("img/loginimg.jpg"), fit: BoxFit.cover)),
+                    image: AssetImage("img/signup.jpg"), fit: BoxFit.cover)),
           ),
           Container(
             width: w,
@@ -35,17 +27,6 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Hello',
-                  style: TextStyle(
-                      fontSize: 38,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey),
-                ),
-                Text(
-                  'Sign in to your Account',
-                  style: TextStyle(fontSize: 20, color: Colors.grey[500]),
-                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -64,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                           hintText: 'Enter your Email',
                           prefixIcon: Icon(
-                            Icons.mail,
+                            Icons.email,
                             color: Color.fromARGB(255, 182, 26, 15),
                           ),
                           focusedBorder: OutlineInputBorder(
@@ -95,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                           hintText: 'Enter your Password',
                           prefixIcon: Icon(
-                            Icons.lock,
+                            Icons.password,
                             color: Color.fromARGB(255, 182, 26, 15),
                           ),
                           focusedBorder: OutlineInputBorder(
@@ -109,20 +90,16 @@ class _LoginPageState extends State<LoginPage> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20)))),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 40),
                 Row(
                   children: [
                     Expanded(child: Container()),
-                    Text(
-                      'Forgot Password?',
-                      style: TextStyle(fontSize: 20, color: Colors.grey[500]),
-                    ),
                   ],
                 ),
               ],
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 0.05),
           Container(
             width: 225,
             height: 70,
@@ -132,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                     image: AssetImage("img/loginbtn.jpg"), fit: BoxFit.cover)),
             child: Center(
               child: Text(
-                'Sign in',
+                'Sign Up',
                 style: TextStyle(
                     fontSize: 38,
                     fontWeight: FontWeight.bold,
@@ -140,20 +117,27 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          SizedBox(height: w * 0.03),
+          SizedBox(height: w * 0.04),
           RichText(
               text: TextSpan(
-                  text: "Dont have an account?",
-                  style: TextStyle(fontSize: 20),
-                  children: [
-                TextSpan(
-                  text: "  Create!",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold),
-                )
-              ])),
+            text: "or sign up using the following method",
+            style: TextStyle(fontSize: 20),
+          )),
+          Wrap(
+            children: List<Widget>.generate(3, (index) {
+              return Padding(
+                padding: const EdgeInsets.all(13.0),
+                child: CircleAvatar(
+                  radius: 26,
+                  backgroundColor: Color.fromARGB(255, 224, 28, 13),
+                  child: CircleAvatar(
+                    radius: 23,
+                    backgroundImage: AssetImage("img/" + images[index]),
+                  ),
+                ),
+              );
+            }),
+          )
         ]),
       ),
     );
