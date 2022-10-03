@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:login_page_practice/auth_controller.dart';
 import 'package:login_page_practice/singup_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,6 +18,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    var emailController = TextEditingController();
+    var passwordController = TextEditingController();
+
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
 
@@ -65,6 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.grey.withOpacity(0.2))
                         ]),
                     child: TextField(
+                        controller: emailController,
                         decoration: InputDecoration(
                             hintText: 'Enter your Email',
                             prefixIcon: Icon(
@@ -95,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.grey.withOpacity(0.2))
                         ]),
                     child: TextField(
+                        controller: passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
                             hintText: 'Enter your Password',
@@ -127,21 +133,27 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             SizedBox(height: 10),
-            Container(
-              width: 225,
-              height: 70,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(26),
-                  image: DecorationImage(
-                      image: AssetImage("img/loginbtn.jpg"),
-                      fit: BoxFit.cover)),
-              child: Center(
-                child: Text(
-                  'Sign in',
-                  style: TextStyle(
-                      fontSize: 38,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
+            GestureDetector(
+              onTap: (() {
+                AuthController.instance.register(emailController.text.trim(),
+                    passwordController.text.trim());
+              }),
+              child: Container(
+                width: 225,
+                height: 70,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(26),
+                    image: DecorationImage(
+                        image: AssetImage("img/loginbtn.jpg"),
+                        fit: BoxFit.cover)),
+                child: Center(
+                  child: Text(
+                    'Sign in',
+                    style: TextStyle(
+                        fontSize: 38,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
                 ),
               ),
             ),
